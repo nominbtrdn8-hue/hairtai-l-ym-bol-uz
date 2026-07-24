@@ -1,1 +1,755 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<title>Батнямд 💗</title>
+
+<style>
+
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@500;700&display=swap');
+
+*{
+ box-sizing:border-box;
+}
+
+body{
+ margin:0;
+ height:100vh;
+ overflow:hidden;
+ background:#fff1f6;
+ display:flex;
+ justify-content:center;
+ align-items:center;
+ font-family:'Quicksand',sans-serif;
+ color:#6b3850;
+}
+
+
+/* эхний loading */
+
+#loading{
+ position:fixed;
+ inset:0;
+ background:#fff1f6;
+ display:flex;
+ justify-content:center;
+ align-items:center;
+ z-index:20;
+ animation:loadingHide 3s forwards;
+}
+
+
+#loading h1{
+ font-family:'Pacifico',cursive;
+ color:#e75480;
+ font-size:40px;
+}
+
+
+@keyframes loadingHide{
+
+0%,80%{
+ opacity:1;
+}
+
+100%{
+ opacity:0;
+ visibility:hidden;
+}
+
+}
+
+
+
+/* зүрх */
+
+.heart{
+
+position:fixed;
+top:-20px;
+font-size:18px;
+z-index:0;
+animation:fall linear infinite;
+
+}
+
+
+@keyframes fall{
+
+from{
+ transform:translateY(-20px);
+}
+
+to{
+ transform:translateY(110vh);
+}
+
+}
+
+
+
+/* нүүр */
+
+.page{
+
+display:none;
+width:92%;
+max-width:400px;
+z-index:2;
+
+}
+
+
+.active{
+
+display:block;
+animation:show .5s;
+
+}
+
+
+
+@keyframes show{
+
+from{
+opacity:0;
+transform:translateY(20px);
+}
+
+to{
+opacity:1;
+transform:translateY(0);
+}
+
+}
+
+
+
+.card{
+
+background:white;
+padding:25px 18px;
+border-radius:30px;
+text-align:center;
+box-shadow:0 10px 30px rgba(255,120,160,.25);
+
+}
+
+
+
+h1{
+
+font-family:'Pacifico',cursive;
+font-size:34px;
+color:#e75480;
+
+}
+
+
+
+h2{
+
+font-size:22px;
+color:#e75480;
+
+}
+
+
+
+p{
+
+font-size:16px;
+
+}
+
+
+
+button,input{
+
+width:85%;
+padding:13px;
+margin:7px;
+border:none;
+border-radius:25px;
+font-size:16px;
+font-family:'Quicksand',sans-serif;
+
+}
+
+
+
+button{
+
+background:#ff8fab;
+color:white;
+cursor:pointer;
+
+}
+
+
+
+.no{
+
+background:#ccc;
+
+}
+
+
+
+input{
+
+background:#fff0f5;
+text-align:center;
+
+}
+
+
+
+.activity.selected{
+
+background:#e75480;
+
+}
+
+
+
+.result{
+
+line-height:2;
+font-size:18px;
+
+}
+
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div id="loading">
+
+<h1>
+Батнямд 💗
+</h1>
+
+</div>
+
+
+
+<script>
+
+setInterval(()=>{
+
+let h=document.createElement("div");
+
+h.className="heart";
+
+h.innerHTML="💗";
+
+h.style.left=Math.random()*100+"%";
+
+h.style.animationDuration=(6+Math.random()*5)+"s";
+
+document.body.appendChild(h);
+
+
+setTimeout(()=>{
+
+h.remove();
+
+},12000);
+
+
+},500);
+
+
+</script><!-- 1-р нүүр -->
+
+<div class="page active" id="page1">
+
+<div class="card">
+
+<h1>
+Надтай болзох уу? 💗
+</h1>
+
+
+<button onclick="yesClick()">
+Тийм 💖
+</button>
+
+
+<button class="no" id="noBtn" onclick="noClick()">
+Үгүй 🙈
+</button>
+
+
+<p id="noText"></p>
+
+
+</div>
+
+</div>
+
+
+
+
+<!-- 2-р нүүр -->
+
+<div class="page" id="page2">
+
+<div class="card">
+
+<h1>
+Yay! 🥰
+</h1>
+
+
+<p>
+Чи зөв сонголт хийлээ 💗
+</p>
+
+
+<p>
+Одоо болзоогоо төлөвлөе ✨
+</p>
+
+
+<button onclick="goPage(3)">
+Үргэлжлүүлэх 💕
+</button>
+
+
+</div>
+
+</div>
+
+
+
+
+
+<!-- 3-р нүүр -->
+
+<div class="page" id="page3">
+
+<div class="card">
+
+
+<h1>
+Хэзээ уулзах вэ? 💕
+</h1>
+
+
+<p>
+📅 Өдөр
+</p>
+
+
+<input 
+type="date"
+id="date"
+min="2026-07-25"
+max="2026-08-31"
+>
+
+
+
+<p>
+⏰ Цаг
+</p>
+
+
+<input
+type="time"
+id="time"
+>
+
+
+
+
+<p>
+💗 Юу хийх вэ?
+</p>
+
+
+
+<button 
+class="activity"
+onclick="chooseActivity(this)">
+🌿 Ханган явах
+</button>
+
+
+
+<button 
+class="activity"
+onclick="chooseActivity(this)">
+🌳 Намсан явах
+</button>
+
+
+
+<button 
+class="activity"
+onclick="chooseActivity(this)">
+🍽 Хоол идэх
+</button>
+
+
+
+<button 
+class="activity"
+onclick="chooseActivity(this)">
+🦁 Амьтны хүрээлэн явах
+</button>
+
+
+
+
+<button onclick="finish()">
+Боллоо 💗
+</button>
+
+
+</div>
+
+</div>
+
+
+
+
+
+
+<!-- 4-р нүүр -->
+
+<div class="page" id="page4">
+
+<div class="card">
+
+
+<h1>
+Бидний болзоо 💗
+</h1>
+
+
+
+<div id="result" class="result">
+
+</div>
+
+
+
+<p id="count"></p>
+
+
+
+
+<h2>
+👗 Хамгийн гоё хувцсаа өмсөөд<br>
+тэр өдөр болзоцгооё 💕
+</h2>
+
+
+
+<p>
+Чамтай хамт байх өдрийг хүлээж байна 🥰
+</p>
+
+
+
+
+<button onclick="restart()">
+Дахиж үзэх 🔄
+</button>
+
+
+
+<button onclick="saveDate()">
+Хадгалах 💾
+</button>
+
+
+
+</div>
+
+</div><script>
+
+let noTexts=[
+"Үгүй 🙈",
+"Гуйж байна 🥺",
+"Хайртай л юм бол Тийм гэж сонго 💗",
+"Жоохон бодоод үз л дээ 🥹"
+];
+
+
+let noIndex=0;
+
+let activity="";
+
+
+
+// Үгүй товч
+
+function noClick(){
+
+noIndex++;
+
+
+if(noIndex>=noTexts.length){
+
+noIndex=0;
+
+}
+
+
+document.getElementById("noBtn").innerHTML=
+noTexts[noIndex];
+
+
+}
+
+
+
+
+// Тийм товч
+
+function yesClick(){
+
+goPage(2);
+
+}
+
+
+
+
+// нүүр солих
+
+function goPage(num){
+
+document.querySelectorAll(".page")
+.forEach(page=>{
+
+page.classList.remove("active");
+
+});
+
+
+document.getElementById("page"+num)
+.classList.add("active");
+
+
+}
+
+
+
+
+
+// хийх зүйл сонгох
+
+function chooseActivity(btn){
+
+
+activity=btn.innerHTML;
+
+
+
+document.querySelectorAll(".activity")
+.forEach(b=>{
+
+b.classList.remove("selected");
+
+});
+
+
+
+btn.classList.add("selected");
+
+
+}
+
+
+
+
+
+// дуусгах
+
+function finish(){
+
+
+let date=
+document.getElementById("date").value;
+
+
+let time=
+document.getElementById("time").value;
+
+
+
+if(date===""){
+
+alert("Өдрөө сонгоно уу 💗");
+
+return;
+
+}
+
+
+if(time===""){
+
+alert("Цагаа сонгоно уу 💗");
+
+return;
+
+}
+
+
+if(activity===""){
+
+alert("Юу хийхээ сонгоно уу 💕");
+
+return;
+
+}
+
+
+
+
+
+document.getElementById("result").innerHTML=
+
+"📅 "+date+
+"<br>"+
+"⏰ "+time+
+"<br>"+
+activity;
+
+
+
+
+let today=new Date();
+
+let meet=new Date(date);
+
+
+
+let days=Math.ceil(
+
+(meet-today)
+
+/
+
+(1000*60*60*24)
+
+);
+
+
+
+if(days<0){
+
+days=0;
+
+}
+
+
+
+document.getElementById("count").innerHTML=
+
+"💗 Болзоо хүртэл "+days+" өдөр үлдлээ";
+
+
+
+goPage(4);
+
+
+}
+
+
+
+
+
+// дахиж үзэх
+
+function restart(){
+
+
+noIndex=0;
+
+activity="";
+
+
+document.getElementById("noBtn").innerHTML=
+"Үгүй 🙈";
+
+
+
+document.querySelectorAll(".activity")
+.forEach(btn=>{
+
+btn.classList.remove("selected");
+
+});
+
+
+
+goPage(1);
+
+
+}
+
+
+
+
+
+// хадгалах
+
+function saveDate(){
+
+
+
+let text=
+
+document.getElementById("result").innerText+
+
+"\n\n👗 Хамгийн гоё хувцсаа өмсөөд тэр өдөр болзоцгооё 💗";
+
+
+
+let file=new Blob(
+
+[text],
+
+{type:"text/plain"}
+
+);
+
+
+
+let link=document.createElement("a");
+
+
+link.href=
+URL.createObjectURL(file);
+
+
+link.download="Batnyam-date.txt";
+
+
+link.click();
+
+
+
+}
+
+
+
+</script>
+
+
+</body>
+
+</html>
